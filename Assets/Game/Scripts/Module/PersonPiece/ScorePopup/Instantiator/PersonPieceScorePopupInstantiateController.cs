@@ -13,7 +13,7 @@ namespace Jaddwal.PersonPiece.ScorePopup
         public bool IsActive { get; set; }
         private WaitForSeconds _waitOneTenthSecond = new WaitForSeconds(.1f);
 
-        public void InstantiateScorePopup(int score, bool isMax, Vector3 position)
+        public void InstantiateScorePopup(int score, bool isMax, Vector3 position, bool removeOtherMax = true)
         {
             if (!IsActive) return;
 
@@ -22,18 +22,18 @@ namespace Jaddwal.PersonPiece.ScorePopup
             popup.SetMax(isMax);
             popup.InstantiateObject(_view.Data.Prefab, position, _view.Data.Parent);
 
-            if (isMax)
+            if (isMax && removeOtherMax)
             {
                 _scorePopups.ForEach(sp => sp.SetMax(false));
             }
             _scorePopups.Add(popup);
         }
 
-        public IEnumerator InstantiateScorePopupEnum(int score, bool isMax, Vector3 position)
+        public IEnumerator InstantiateScorePopupEnum(int score, bool isMax, Vector3 position, bool removeOtherMax = true)
         {
             if (!IsActive)
                 yield break;
-            InstantiateScorePopup(score, isMax, position);
+            InstantiateScorePopup(score, isMax, position, removeOtherMax);
             yield return _waitOneTenthSecond;
         }
 

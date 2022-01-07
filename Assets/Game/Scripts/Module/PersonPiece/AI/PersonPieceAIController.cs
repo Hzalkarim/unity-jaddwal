@@ -107,7 +107,7 @@ namespace Jaddwal.PersonPiece.AI
                         schMax = zeros[i];
                     }
 
-                    yield return _scorePopupInstantiator.InstantiateScorePopupEnum(max * 2, max == maxValue, cells[i].GetTransform().position);
+                    yield return _scorePopupInstantiator.InstantiateScorePopupEnum(max * 2, max == maxValue, cells[i].GetTransform().position, max != maxValue);
                 }
             }
 
